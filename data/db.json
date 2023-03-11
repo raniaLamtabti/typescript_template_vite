@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Home",
+      "color": "red"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "date": "02-03-2023",
+      "time": "10:30",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 1
+    }
+  ]
+}

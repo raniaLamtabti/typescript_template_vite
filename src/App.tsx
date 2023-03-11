@@ -1,34 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Routes, Route, Outlet } from "react-router-dom";
+import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import Dashboard from "./pages/Dashboard";
+import Filter from "./components/Filter";
+import Create from "./components/Create";
+import "./App.css";
+
+const Template = () => {
+  return (
+    <Box bgColor={"brand.primary"} minH="100vh">
+      <Flex
+        h={"30vh"}
+        w={"100vw"}
+        className="dashBg"
+        justifyContent={"center"}
+        alignItems={"center"}
+        color="#FFF"
+      >
+        <Heading>Hi , You</Heading>
+      </Flex>
+      <Stack
+        spacing={"20px"}
+        bgColor={"brand.white"}
+        mx={"10%"}
+        position="absolute"
+        top={"25vh"}
+        w="80%"
+        h={"70vh"}
+        borderRadius="3xl"
+        p="20px"
+      >
+        <Flex justifyContent={"space-between"}>
+          <Create />
+        </Flex>
+        <Box py={"5px"}>
+          <Outlet />
+        </Box>
+      </Stack>
+    </Box>
+  );
+};
 
 function App() {
-  const [count,         setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <Box className="app" h={"100vh"}>
+      <Routes>
+        <Route element={<Template />}>
+          <Route path="/" element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </Box>
+  );
 }
 
-export default App
+export default App;
