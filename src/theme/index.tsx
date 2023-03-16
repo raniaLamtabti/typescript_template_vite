@@ -6,7 +6,7 @@ export default extendTheme({
     md: "48em",
     lg: "62em",
     xl: "90em",
-    xxl: "100EM",
+    xxl: "100em",
     xxxl: "120em",
   },
   colors: {

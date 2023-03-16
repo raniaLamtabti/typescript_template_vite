@@ -18,24 +18,31 @@ import {
   Stack,
   Switch,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { getCategories } from "../api/categories";
 import { createTask } from "../api/tasks";
 
 const Create = () => {
-  const titleRef = React.createRef();
-  const cateRef = React.createRef();
-  const dateRef = React.createRef();
-  const timeRef = React.createRef();
-  const urgentRef = React.createRef();
+  const titleRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+  const cateRef = React.useRef() as React.MutableRefObject<HTMLSelectElement>;
+  const dateRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+  const timeRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+  const urgentRef = React.useRef() as React.MutableRefObject<HTMLScriptElement>;
 
   const queryClient = useQueryClient();
 
+  const [urgent, setUrgent] = React.useState(false);
+  const [urgentVal, setUrgentVal] = React.useState(false);
+
+  console.log(urgentRef.valueOf);
   const categoriesQuery = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
   });
+
+  console.log("urgent 1:", urgent);
+  console.log("urgentVal 1:", urgentVal);
 
   const createTaskMutation = useMutation({
     mutationFn: createTask,
@@ -45,17 +52,30 @@ const Create = () => {
     },
   });
 
-  function handleSubmitTask(e) {
+  function handleSubmitTask(e: { preventDefault: () => void }) {
     e.preventDefault();
+    const date = new Date(dateRef.current.value);
     console.log("hi");
     createTaskMutation.mutate({
       title: titleRef.current.value,
-      categoryId: cateRef.current.value,
-      date: dateRef.current.value,
+      categoryId: parseInt(cateRef.current.value),
+      date: date,
       time: timeRef.current.value,
+      id: Date.now(),
+      isDone: false,
+      isUrgent: urgent,
     });
+    setUrgent(false);
+    setUrgentVal(false);
+    console.log("urgent3:", urgent);
+    console.log("urgentVal3:", urgentVal);
   }
-
+  const handleInputChange = () => {
+    setUrgent(!urgent);
+    setUrgentVal(!urgentVal);
+    console.log("urgent:", urgent);
+    console.log("urgentVal:", urgentVal);
+  };
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -133,7 +153,11 @@ const Create = () => {
                 <FormLabel htmlFor="isChecked">
                   <Text as="b">Urgent</Text>
                 </FormLabel>
-                <Switch id="isChecked" />
+                <Switch
+                  id="isChecked"
+                  isChecked={urgentVal}
+                  onChange={handleInputChange}
+                />
               </FormControl>
             </ModalBody>
 
@@ -146,8 +170,9 @@ const Create = () => {
                   background: "brand.gray",
                   color: "brand.primary",
                 }}
+                type={"submit"}
               >
-                Add
+                {createTaskMutation.isLoading ? "Loading..." : "Close"}
               </Button>
               <Button
                 bgColor={"brand.accent"}
@@ -155,7 +180,6 @@ const Create = () => {
                 onClick={onClose}
                 disabled={createTaskMutation.isLoading}
               >
-                {createTaskMutation.isLoading ? "Loading..." : "Create"}
                 Close
               </Button>
             </ModalFooter>

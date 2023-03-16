@@ -1,13 +1,14 @@
 import axios from "axios";
+import Category from "../interfaces/Category";
 
-export function getCategories() {
-  return axios
-    .get("http://localhost:3000/categories", { params: { _sort: "date" } })
-    .then((res) => res.data);
+export async function getCategories() {
+  const res = await axios.get("http://localhost:3000/categories", {
+    params: { _sort: "name" },
+  });
+  return res.data;
 }
 
-export function getCategory(id: number) {
-  return axios
-    .get(`http://localhost:3000/categories/${id}`)
-    .then((res) => res.data);
+export async function getCategory(id: number): Promise<Category> {
+  const res = await axios.get(`http://localhost:3000/categories/${id}`);
+  return res.data;
 }

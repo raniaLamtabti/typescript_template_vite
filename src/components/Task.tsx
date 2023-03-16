@@ -8,11 +8,32 @@ import {
   Center,
   Badge,
   Icon,
+  Button,
 } from "@chakra-ui/react";
-
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { getCategory } from "../api/categories";
+import { deleteTask } from "../api/tasks";
+import { finishTask } from "../api/tasks";
+import { queryClient } from "../queryClient";
 
 const Task = (props: any) => {
+  const categoryQuery = useQuery({
+    queryKey: ["categories", props?.cat],
+    enabled: props?.cat != null,
+    queryFn: () => getCategory(props.cat),
+  });
+
+  const deleteTaskMutation = async () => {
+    await deleteTask(props.idTask);
+    await queryClient.refetchQueries(["tasks"]);
+  };
+
+  const finishTaskMutation = () => {
+    console.log(props);
+    return finishTask(props.idTask);
+  };
+
   return (
     <Flex
       p="20px"
@@ -36,19 +57,19 @@ const Task = (props: any) => {
             {props.name}
           </Text>
           <Badge
-            colorScheme={props.catColor}
+            colorScheme={categoryQuery.data?.color}
             px="8px"
             py="2px"
             borderRadius={"full"}
           >
-            {props.cat}
+            {categoryQuery.data?.name}
           </Badge>
         </Stack>
       </Flex>
       <Flex gap={"20px"} alignItems="center">
         <Stack>
           <Text fontSize="md" as="b">
-            {props.date}
+            {new Date(props.date).toLocaleDateString("fr-FR")}
           </Text>
           <Text>{props.time}</Text>
         </Stack>
@@ -56,8 +77,10 @@ const Task = (props: any) => {
           <Divider orientation="vertical" borderColor={"brand.black"} />
         </Center>
         <Stack>
-          <Checkbox colorScheme="pink"></Checkbox>
-          <Icon as={DeleteIcon} color="red.500" />
+          <Checkbox colorScheme="pink" onChange={finishTaskMutation}></Checkbox>
+          <Button onClick={deleteTaskMutation}>
+            <Icon as={DeleteIcon} color="red.500" />
+          </Button>
         </Stack>
       </Flex>
     </Flex>

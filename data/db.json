@@ -8,13 +8,13 @@
   ],
   "tasks": [
     {
-      "id": 1,
-      "title": "json-server",
-      "date": "02-03-2023",
-      "time": "10:30",
-      "isDone": false,
+      "title": "Task 3",
+      "date": "2023-03-01T00:00:00.000Z",
+      "time": "21:02",
+      "isDone": true,
       "isUrgent": true,
-      "categoryId": 1
+      "categoryId": 1,
+      "id": 1678737665456
     }
   ]
 }
