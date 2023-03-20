@@ -22,40 +22,35 @@ import React, { useRef, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { getCategories } from "../api/categories";
 import { createTask } from "../api/tasks";
+import { Category } from "../interfaces";
 
-const Create = () => {
+const CreateTask = () => {
   const titleRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
   const cateRef = React.useRef() as React.MutableRefObject<HTMLSelectElement>;
   const dateRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
   const timeRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
-  const urgentRef = React.useRef() as React.MutableRefObject<HTMLScriptElement>;
 
   const queryClient = useQueryClient();
 
   const [urgent, setUrgent] = React.useState(false);
   const [urgentVal, setUrgentVal] = React.useState(false);
 
-  console.log(urgentRef.valueOf);
   const categoriesQuery = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
   });
 
-  console.log("urgent 1:", urgent);
-  console.log("urgentVal 1:", urgentVal);
-
   const createTaskMutation = useMutation({
     mutationFn: createTask,
     onSuccess: (data) => {
       queryClient.setQueryData(["tasks", data.id], data);
-      queryClient.invalidateQueries(["tasks"], { exact: true });
+      queryClient.invalidateQueries(["tasks"]);
     },
   });
 
   function handleSubmitTask(e: { preventDefault: () => void }) {
     e.preventDefault();
     const date = new Date(dateRef.current.value);
-    console.log("hi");
     createTaskMutation.mutate({
       title: titleRef.current.value,
       categoryId: parseInt(cateRef.current.value),
@@ -67,14 +62,10 @@ const Create = () => {
     });
     setUrgent(false);
     setUrgentVal(false);
-    console.log("urgent3:", urgent);
-    console.log("urgentVal3:", urgentVal);
   }
   const handleInputChange = () => {
     setUrgent(!urgent);
     setUrgentVal(!urgentVal);
-    console.log("urgent:", urgent);
-    console.log("urgentVal:", urgentVal);
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -121,13 +112,12 @@ const Create = () => {
                   id="category"
                   ref={cateRef as React.RefObject<HTMLSelectElement>}
                 >
-                  <option value="1">Home</option>
-                </Select>
-                {/*<Select placeholder="Select option" ref={cateRef}>
-                  {categoriesQuery.data.map((cat: any) => (
-                    <option value={cat.id}>{cat.name}</option>
+                  {categoriesQuery.data?.map((cat: Category) => (
+                    <option value={cat.id} key={cat.id}>
+                      {cat.name}
+                    </option>
                   ))}
-                  </Select>*/}
+                </Select>
               </FormControl>
               <FormControl>
                 <FormLabel>
@@ -172,7 +162,7 @@ const Create = () => {
                 }}
                 type={"submit"}
               >
-                {createTaskMutation.isLoading ? "Loading..." : "Close"}
+                {createTaskMutation.isLoading ? "Loading..." : "Add"}
               </Button>
               <Button
                 bgColor={"brand.accent"}
@@ -190,4 +180,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreateTask;

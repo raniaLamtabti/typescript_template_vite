@@ -2,16 +2,25 @@ import { Stack } from "@chakra-ui/react";
 import Task from "../components/Task";
 import { useQuery } from "@tanstack/react-query";
 import { getTasks } from "../api/tasks";
-import TaskInterface from "../interfaces/Task";
-import useTaskStore from "../app/taskStore";
+import { Task as TaskInterface } from "../interfaces";
+import { useFilterStore } from "../store";
 
 const Dashboard = () => {
-  const { tasks } = useTaskStore((state: any) => ({
-    tasks: state.tasks,
-  }));
+  const filter = useFilterStore((state) => {
+    const filterObj = {
+      categoryId: state.categoryId,
+      date: state.date,
+      isUrgent: state.isUrgent,
+    };
+    return filterObj;
+  });
+
+  // const categoryId = useFilterStore((state) => state.categoryId);
+  // const isUrgent = useFilterStore((state) => state.isUrgent);
+  // const date = useFilterStore((state) => state.date);
   const tasksQuery = useQuery({
-    queryKey: ["tasks"],
-    queryFn: getTasks,
+    queryKey: ["tasks", filter],
+    queryFn: () => getTasks(filter),
   });
 
   if (tasksQuery.status === "loading") return <h1>Loading...</h1>;
@@ -21,7 +30,7 @@ const Dashboard = () => {
 
   return (
     <Stack spacing={"20px"} h="-webkit-fit-content" overflowY={"scroll"}>
-      {tasks.data.map((task: TaskInterface) => (
+      {tasksQuery.data.map((task: TaskInterface) => (
         <Task
           key={task.id}
           idTask={task.id}
@@ -31,6 +40,7 @@ const Dashboard = () => {
           cat={task.categoryId}
           date={task.date}
           time={task.time}
+          done={task.isDone}
         />
       ))}
     </Stack>

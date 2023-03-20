@@ -13,8 +13,8 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { getCategory } from "../api/categories";
-import { deleteTask } from "../api/tasks";
-import { finishTask } from "../api/tasks";
+import { deleteTask, finishTask } from "../api/tasks";
+import {} from "../api/tasks";
 import { queryClient } from "../queryClient";
 
 const Task = (props: any) => {
@@ -29,9 +29,9 @@ const Task = (props: any) => {
     await queryClient.refetchQueries(["tasks"]);
   };
 
-  const finishTaskMutation = () => {
-    console.log(props);
-    return finishTask(props.idTask);
+  const finishTaskMutation = async (event: any) => {
+    await finishTask(props.idTask, event.target.checked);
+    await queryClient.refetchQueries(["tasks"]);
   };
 
   return (
@@ -77,7 +77,12 @@ const Task = (props: any) => {
           <Divider orientation="vertical" borderColor={"brand.black"} />
         </Center>
         <Stack>
-          <Checkbox colorScheme="pink" onChange={finishTaskMutation}></Checkbox>
+          <Checkbox
+            type="checkbox"
+            colorScheme="pink"
+            onChange={finishTaskMutation}
+            defaultChecked={props.done}
+          ></Checkbox>
           <Button onClick={deleteTaskMutation}>
             <Icon as={DeleteIcon} color="red.500" />
           </Button>

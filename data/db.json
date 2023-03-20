@@ -4,17 +4,101 @@
       "id": 1,
       "name": "Home",
       "color": "red"
+    },
+    {
+      "id": 2,
+      "name": "Work",
+      "color": "blue"
+    },
+    {
+      "id": 1679336668560,
+      "name": "Edu",
+      "color": "green"
+    },
+    {
+      "id": 1679342250722,
+      "name": "Self",
+      "color": "pink"
     }
   ],
   "tasks": [
     {
-      "title": "Task 3",
+      "title": "Task 1",
       "date": "2023-03-01T00:00:00.000Z",
       "time": "21:02",
       "isDone": true,
       "isUrgent": true,
       "categoryId": 1,
       "id": 1678737665456
+    },
+    {
+      "title": "Task 2",
+      "date": "2023-03-01T00:00:00.000Z",
+      "time": "21:02",
+      "isDone": true,
+      "isUrgent": true,
+      "categoryId": 2,
+      "id": 167873875456
+    },
+    {
+      "title": "Task 3",
+      "date": "2023-03-01T00:00:00.000Z",
+      "time": "21:02",
+      "isDone": true,
+      "isUrgent": false,
+      "categoryId": 1,
+      "id": 1670537665456
+    },
+    {
+      "title": "Task 4",
+      "date": "2023-03-21T00:00:00.000Z",
+      "time": "21:02",
+      "isDone": true,
+      "isUrgent": false,
+      "categoryId": 2,
+      "id": 167874575456
+    }
+  ],
+  "colors": [
+    {
+      "id": 0,
+      "color": "black"
+    },
+    {
+      "id": 1,
+      "color": "red"
+    },
+    {
+      "id": 2,
+      "color": "orange"
+    },
+    {
+      "id": 3,
+      "color": "yellow"
+    },
+    {
+      "id": 4,
+      "color": "green"
+    },
+    {
+      "id": 5,
+      "color": "teal"
+    },
+    {
+      "id": 6,
+      "color": "blue"
+    },
+    {
+      "id": 7,
+      "color": "cyan"
+    },
+    {
+      "id": 8,
+      "color": "purple"
+    },
+    {
+      "id": 9,
+      "color": "pink"
     }
   ]
 }

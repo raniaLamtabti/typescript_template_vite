@@ -2,7 +2,8 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import Dashboard from "./pages/Dashboard";
 import Filter from "./components/Filter";
-import Create from "./components/Create";
+import CreateTask from "./components/CreateTask";
+import CreateCategory from "./components/CreateCategory";
 import "./App.css";
 
 const Template = () => {
@@ -29,8 +30,12 @@ const Template = () => {
         borderRadius="3xl"
         p="20px"
       >
-        <Flex justifyContent={"space-between"}>
-          <Create />
+        <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Filter />
+          <Flex gap={"20px"}>
+            <CreateCategory />
+            <CreateTask />
+          </Flex>
         </Flex>
         <Box py={"5px"}>
           <Outlet />
