@@ -2,9 +2,7 @@ import axios from "axios";
 import { Category } from "../interfaces";
 
 export async function getCategories() {
-  const res = await axios.get("http://localhost:3000/categories", {
-    params: { _sort: "name" },
-  });
+  const res = await axios.get("http://localhost:3000/categories");
   return res.data;
 }
 

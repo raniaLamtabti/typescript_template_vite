@@ -1,6 +1,8 @@
 import { Routes, Route, Outlet } from "react-router-dom";
 import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import Dashboard from "./pages/Dashboard";
+import SideBar from "./components/SideBar";
+import TopBar from "./components/TopBar";
 import Filter from "./components/Filter";
 import CreateTask from "./components/CreateTask";
 import CreateCategory from "./components/CreateCategory";
@@ -8,40 +10,15 @@ import "./App.css";
 
 const Template = () => {
   return (
-    <Box bgColor={"brand.primary"} minH="100vh">
-      <Flex
-        h={"30vh"}
-        w={"100vw"}
-        className="dashBg"
-        justifyContent={"center"}
-        alignItems={"center"}
-        color="#FFF"
-      >
-        <Heading>Hi , You</Heading>
-      </Flex>
-      <Stack
-        spacing={"20px"}
-        bgColor={"brand.white"}
-        mx={"10%"}
-        position="absolute"
-        top={"25vh"}
-        w="80%"
-        h={"70vh"}
-        borderRadius="3xl"
-        p="20px"
-      >
-        <Flex justifyContent={"space-between"} alignItems={"center"}>
-          <Filter />
-          <Flex gap={"20px"}>
-            <CreateCategory />
-            <CreateTask />
-          </Flex>
-        </Flex>
-        <Box py={"5px"}>
+    <Flex bgColor={"brand.white"} minH="100vh" minW={"100vw"}>
+      <SideBar />
+      <Box py={"5px"} w={"-webkit-fill-available"}>
+        <TopBar />
+        <Box p={"50px"}>
           <Outlet />
         </Box>
-      </Stack>
-    </Box>
+      </Box>
+    </Flex>
   );
 };
 

@@ -58,15 +58,15 @@ const CreateCategory = () => {
       <Flex gap="30px" wrap="wrap">
         <Button
           onClick={onOpen}
-          bgColor={"brand.primary"}
-          color={"brand.white"}
+          bgColor={"brand.gray"}
+          color={"brand.primary"}
           border="none"
           _hover={{
             background: "brand.gray",
             color: "brand.primary",
           }}
         >
-          Add Category
+          + Category
         </Button>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -75,7 +75,7 @@ const CreateCategory = () => {
           JSON.stringify(createCategoryMutation.error)}
         <form onSubmit={handleSubmitCategory}>
           <ModalContent>
-            <ModalHeader>Add Category</ModalHeader>
+            <ModalHeader>+ Category</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <FormControl>

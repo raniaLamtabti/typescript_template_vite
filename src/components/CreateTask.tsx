@@ -74,15 +74,15 @@ const CreateTask = () => {
       <Flex gap="30px" wrap="wrap">
         <Button
           onClick={onOpen}
-          bgColor={"brand.primary"}
-          color={"brand.white"}
+          bgColor={"brand.gray"}
+          color={"brand.primary"}
           border="none"
           _hover={{
             background: "brand.gray",
             color: "brand.primary",
           }}
         >
-          Add Task
+          + Task
         </Button>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>

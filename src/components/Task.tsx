@@ -44,6 +44,7 @@ const Task = (props: any) => {
       justifyContent={"space-between"}
       alignItems="center"
       h="80px"
+      mb="10px"
     >
       <Flex gap="20px">
         <Box
