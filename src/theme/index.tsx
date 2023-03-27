@@ -1,6 +1,12 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
+
+const config: ThemeConfig = {
+  initialColorMode: "light",
+  useSystemColorMode: false,
+};
 
 export default extendTheme({
+  config,
   breakpoints: {
     sm: "5em",
     md: "48em",
@@ -8,15 +14,6 @@ export default extendTheme({
     xl: "90em",
     xxl: "100em",
     xxxl: "120em",
-  },
-  colors: {
-    brand: {
-      primary: "#3C61C7",
-      accent: "#FF00B8",
-      gray: "#eff2fa",
-      white: "#FFF",
-      black: "#050912",
-    },
   },
   fonts: {
     body: "'Poppins', sans-serif",

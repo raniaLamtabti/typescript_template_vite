@@ -58,12 +58,12 @@ const CreateCategory = () => {
       <Flex gap="30px" wrap="wrap">
         <Button
           onClick={onOpen}
-          bgColor={"brand.gray"}
-          color={"brand.primary"}
+          bgColor={"gray.50"}
+          color={"blue"}
           border="none"
           _hover={{
-            background: "brand.gray",
-            color: "brand.primary",
+            background: "gray.50",
+            color: "blue",
           }}
         >
           + Category
@@ -109,19 +109,19 @@ const CreateCategory = () => {
             <ModalFooter>
               <Button
                 mr={3}
-                bgColor={"brand.primary"}
-                color={"brand.white"}
+                bgColor={"blue"}
+                color={"white"}
                 _hover={{
-                  background: "brand.gray",
-                  color: "brand.primary",
+                  background: "gray.50",
+                  color: "blue",
                 }}
                 type={"submit"}
               >
                 {createCategoryMutation.isLoading ? "Loading..." : "Add"}
               </Button>
               <Button
-                bgColor={"brand.accent"}
-                color={"brand.white"}
+                bgColor={"pink.400"}
+                color={"white"}
                 onClick={onClose}
                 disabled={createCategoryMutation.isLoading}
               >

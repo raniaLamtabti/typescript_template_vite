@@ -20,17 +20,21 @@ import {
 import { getCategories } from "../api/categories";
 import { useQuery } from "@tanstack/react-query";
 import { Category } from "../interfaces";
-import { useFilterStore } from "../store";
 import { BsFillCalendarCheckFill, BsCalendarWeekFill } from "react-icons/bs";
 import { MdOutlineRemoveDone } from "react-icons/md";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const categoriesQuery = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
   });
+
+  const handleNavigate = (userId) => {
+    navigate(`/tas/${userId}`, { state: { from: "dashboard" } });
+  };
+
   return (
     <Box w="300px" px="50px" py="50px" bgColor={"gray.50"}>
       <Text as="b" mb="20px">
@@ -38,6 +42,7 @@ const SideBar = () => {
       </Text>
       <Stack spacing={"20px"} mt={"50px"}>
         <Link
+          onClick={() => navigate("/")}
           display={"flex"}
           gap="20px"
           alignItems={"center"}
@@ -47,6 +52,7 @@ const SideBar = () => {
           <BsFillCalendarCheckFill color="green" /> Today
         </Link>
         <Link
+          onClick={() => navigate("/upcoming")}
           display={"flex"}
           gap="20px"
           alignItems={"center"}
@@ -56,6 +62,7 @@ const SideBar = () => {
           <BsCalendarWeekFill color="#3182CE" /> Upcoming
         </Link>
         <Link
+          onClick={() => navigate("/notDone")}
           display={"flex"}
           gap="20px"
           alignItems={"center"}
@@ -68,8 +75,12 @@ const SideBar = () => {
           <AccordionItem>
             <h2>
               <AccordionButton
-                _focus={{ bgColor: "none", border: "none", outline: "none" }}
-                _hover={{ bgColor: "none", border: "none" }}
+                _focus={{
+                  bgcolor: "none",
+                  border: "none",
+                  outline: "none",
+                }}
+                _hover={{ bgcolor: "none", border: "none" }}
               >
                 <Box as="span" flex="1" textAlign="left">
                   <Text fontSize="18px" as="b">
@@ -87,6 +98,7 @@ const SideBar = () => {
             >
               {categoriesQuery.data?.map((cat: Category) => (
                 <Link
+                  onClick={() => navigate(`/tasks/${cat.name}/${cat.id}`)}
                   key={cat.id}
                   _hover={{ textDecoration: "none" }}
                   fontSize="18px"

@@ -38,56 +38,42 @@ const Task = (props: any) => {
     <Flex
       p="20px"
       borderRadius={"md"}
-      bg={"brand.gray"}
+      bg={"gray.50"}
       w="100%"
-      color={"brand.black"}
+      color={"gray.50.800"}
       justifyContent={"space-between"}
       alignItems="center"
-      h="80px"
+      h="50px"
       mb="10px"
     >
-      <Flex gap="20px">
+      <Flex gap="20px" alignItems="center">
         <Box
-          h={"70px"}
+          h={"40px"}
           w="6px"
           borderRadius={"full"}
           backgroundColor={props.state != true ? "green" : "pink"}
         ></Box>
-        <Stack>
-          <Text fontSize="xl" as="b">
-            {props.name}
-          </Text>
-          <Badge
-            colorScheme={categoryQuery.data?.color}
-            px="8px"
-            py="2px"
-            borderRadius={"full"}
-          >
-            {categoryQuery.data?.name}
-          </Badge>
-        </Stack>
+        <Text fontSize="xl" as="b">
+          {props.name}
+        </Text>
       </Flex>
       <Flex gap={"20px"} alignItems="center">
-        <Stack>
-          <Text fontSize="md" as="b">
-            {new Date(props.date).toLocaleDateString("fr-FR")}
-          </Text>
-          <Text>{props.time}</Text>
-        </Stack>
-        <Center height="70px">
-          <Divider orientation="vertical" borderColor={"brand.black"} />
+        <Text>{props.time}</Text>
+        <Text>{new Date(props.date).toLocaleDateString("fr-FR")}</Text>
+        <Center height="40px">
+          <Divider orientation="vertical" borderColor={"gray.50.800"} />
         </Center>
-        <Stack>
+        <Flex>
           <Checkbox
             type="checkbox"
             colorScheme="pink"
             onChange={finishTaskMutation}
             defaultChecked={props.done}
           ></Checkbox>
-          <Button onClick={deleteTaskMutation}>
+          <Button onClick={deleteTaskMutation} bg="transparent">
             <Icon as={DeleteIcon} color="red.500" />
           </Button>
-        </Stack>
+        </Flex>
       </Flex>
     </Flex>
   );

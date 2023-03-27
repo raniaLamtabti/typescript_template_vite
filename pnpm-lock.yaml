@@ -1714,7 +1714,7 @@ packages:
     resolution: {integrity: sha512-2AMpRiA6QivHOUiBpQAVxjiHAA68Ei23ZUMNaRJrN6omWiSFLoYrxGcT6BXtuzp0Jw4h6HZCmGGIM/gbwebO2A==}
     engines: {node: '>=12'}
     dependencies:
-      remove-accents: 0.4.2
+      remove-pink.400s: 0.4.2
     dev: false
 
   /@tanstack/query-core/4.26.1:
@@ -3306,7 +3306,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /remove-accents/0.4.2:
+  /remove-pink.400s/0.4.2:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
     dev: false
 
