@@ -8,6 +8,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Task from "../components/Task";
 import { useQuery } from "@tanstack/react-query";
@@ -41,24 +42,22 @@ const Dashboard = () => {
     queryFn: () => getTasks(filter),
   });
 
-  console.log(categoriesQuery.data, tasksQuery.data);
-
   const tasksCategories = tasksQuery.data?.map(
     (task: TaskInterface) => task.categoryId
   );
-  console.log(tasksCategories);
   const uniqueSet = new Set(tasksCategories);
   const uniqueCategories = Array.from(uniqueSet);
-  console.log(uniqueCategories);
 
   if (tasksQuery.status === "loading") return <h1>Loading...</h1>;
   if (tasksQuery.status === "error") {
     return <h1>{JSON.stringify(tasksQuery.error)}</h1>;
   }
+
+  const text = useColorModeValue("textLight", "textDark");
   return (
     // Today
-    <Stack spacing={"20px"} h="-webkit-fit-content" overflowY={"scroll"}>
-      <Heading color={"blue"}>Today Tasks</Heading>
+    <Stack spacing={"20px"} h="-webkit-fit-content">
+      <Heading color={text}>Today Tasks</Heading>
       <Accordion defaultIndex={[0]} allowMultiple>
         {categoriesQuery.data
           ?.filter((cat: Category) => uniqueCategories.includes(cat.id))
@@ -93,6 +92,7 @@ const Dashboard = () => {
                       catColor={task.categoryId}
                       cat={task.categoryId}
                       time={task.time}
+                      date={task.date}
                       done={task.isDone}
                     />
                   ))}

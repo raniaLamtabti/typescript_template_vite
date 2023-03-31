@@ -17,6 +17,7 @@ import {
   Select,
   Stack,
   Switch,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
@@ -69,17 +70,20 @@ const CreateTask = () => {
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const bgGray = useColorModeValue("bgGrayLight", "bgGrayDark");
+  const text = useColorModeValue("textLight", "textDark");
+
   return (
     <Box>
       <Flex gap="30px" wrap="wrap">
         <Button
           onClick={onOpen}
-          bgColor={"gray.50"}
-          color={"blue"}
+          bgColor={bgGray}
+          color={text}
           border="none"
           _hover={{
-            background: "gray.50",
-            color: "blue",
+            background: bgGray,
+            color: text,
           }}
         >
           + Task
@@ -89,7 +93,7 @@ const CreateTask = () => {
         <ModalOverlay />
         {createTaskMutation.isError && JSON.stringify(createTaskMutation.error)}
         <form onSubmit={handleSubmitTask}>
-          <ModalContent>
+          <ModalContent color={text} bgColor={bgGray}>
             <ModalHeader>Add Task</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -154,19 +158,19 @@ const CreateTask = () => {
             <ModalFooter>
               <Button
                 mr={3}
-                bgColor={"blue"}
-                color={"white"}
+                bgColor={"primary"}
+                color={text}
                 _hover={{
-                  background: "gray.50",
-                  color: "blue",
+                  background: "#F9F9F9",
+                  color: "primary",
                 }}
                 type={"submit"}
               >
                 {createTaskMutation.isLoading ? "Loading..." : "Add"}
               </Button>
               <Button
-                bgColor={"pink.400"}
-                color={"white"}
+                bgColor={"purpleBrand"}
+                color={text}
                 onClick={onClose}
                 disabled={createTaskMutation.isLoading}
               >

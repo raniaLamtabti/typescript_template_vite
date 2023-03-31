@@ -16,6 +16,7 @@ import {
   AccordionPanel,
   AccordionIcon,
   border,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { getCategories } from "../api/categories";
 import { useQuery } from "@tanstack/react-query";
@@ -23,6 +24,7 @@ import { Category } from "../interfaces";
 import { BsFillCalendarCheckFill, BsCalendarWeekFill } from "react-icons/bs";
 import { MdOutlineRemoveDone } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import CreateCategory from "./CreateCategory";
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -31,12 +33,15 @@ const SideBar = () => {
     queryFn: getCategories,
   });
 
-  const handleNavigate = (userId) => {
+  const handleNavigate = (userId: number) => {
     navigate(`/tas/${userId}`, { state: { from: "dashboard" } });
   };
 
+  const bgGray = useColorModeValue("bgGrayLight", "bgGrayDark");
+  const text = useColorModeValue("textLight", "textDark");
+
   return (
-    <Box w="300px" px="50px" py="50px" bgColor={"gray.50"}>
+    <Box w="300px" px="50px" py="50px" bgColor={bgGray} color={text}>
       <Text as="b" mb="20px">
         Hi You
       </Text>
@@ -81,6 +86,7 @@ const SideBar = () => {
                   outline: "none",
                 }}
                 _hover={{ bgcolor: "none", border: "none" }}
+                pl="0px"
               >
                 <Box as="span" flex="1" textAlign="left">
                   <Text fontSize="18px" as="b">
@@ -94,7 +100,8 @@ const SideBar = () => {
               pb={4}
               display={"flex"}
               flexDirection="column"
-              gap="20px"
+              gap="10px"
+              pl="0px"
             >
               {categoriesQuery.data?.map((cat: Category) => (
                 <Link
@@ -102,10 +109,14 @@ const SideBar = () => {
                   key={cat.id}
                   _hover={{ textDecoration: "none" }}
                   fontSize="18px"
+                  display={"flex"}
+                  gap="10px"
                 >
+                  <Box>{cat.emoji}</Box>
                   {cat.name}
                 </Link>
               ))}
+              <CreateCategory />
             </AccordionPanel>
           </AccordionItem>
         </Accordion>

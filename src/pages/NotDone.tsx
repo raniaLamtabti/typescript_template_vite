@@ -8,6 +8,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Task from "../components/Task";
 import { useQuery } from "@tanstack/react-query";
@@ -53,11 +54,13 @@ const Dashboard = () => {
     return <h1>{JSON.stringify(tasksQuery.error)}</h1>;
   }
 
+  const text = useColorModeValue("textLight", "textDark");
+
   return (
     // Not done
-    <Stack spacing={"50px"} h="-webkit-fit-content" overflowY={"scroll"}>
-      <Stack spacing={"20px"} h="-webkit-fit-content" overflowY={"scroll"}>
-        <Heading color={"blue"}>Not Done</Heading>
+    <Stack spacing={"50px"} h="-webkit-fit-content">
+      <Stack spacing={"20px"} h="-webkit-fit-content">
+        <Heading color={text}>Not Done</Heading>
         <Accordion defaultIndex={[0]} allowMultiple>
           {categoriesQuery.data
             ?.filter((cat: Category) => uniqueCategories.includes(cat.id))

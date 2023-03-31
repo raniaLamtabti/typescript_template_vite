@@ -11,11 +11,12 @@ export async function getCategory(id: number): Promise<Category> {
   return res.data;
 }
 
-export async function createCategory({ id, name, color }: Category) {
+export async function createCategory({ id, name, color, emoji }: Category) {
   const res = await axios.post("http://localhost:3000/categories", {
     id,
     name,
     color,
+    emoji,
   });
   return res.data;
 }

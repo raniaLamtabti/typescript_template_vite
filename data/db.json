@@ -3,22 +3,48 @@
     {
       "id": 1,
       "name": "Home",
-      "color": "red"
+      "color": "red",
+      "emoji": "🥲"
     },
     {
       "id": 2,
       "name": "Work",
-      "color": "blue"
+      "color": "blue",
+      "emoji": "🥲"
     },
     {
       "id": 1679336668560,
       "name": "Edu",
-      "color": "green"
+      "color": "green",
+      "emoji": "🥲"
     },
     {
       "id": 1679342250722,
       "name": "Self",
-      "color": "pink"
+      "color": "pink",
+      "emoji": "🥲"
+    },
+    {
+      "id": 1680198724901,
+      "name": "new",
+      "color": "blue"
+    },
+    {
+      "id": 1680198800754,
+      "name": "new,",
+      "color": "orange"
+    },
+    {
+      "id": 1680198847963,
+      "name": "ghjkl",
+      "color": "cyan",
+      "emoji": "🥲"
+    },
+    {
+      "id": 1680198870707,
+      "name": "n,;:",
+      "color": "blue",
+      "emoji": "😁"
     }
   ],
   "tasks": [
@@ -98,7 +124,7 @@
       "title": "Task 2",
       "date": "2023-03-23T00:00:00.000Z",
       "time": "15:13",
-      "isDone": false,
+      "isDone": true,
       "isUrgent": true,
       "categoryId": 1,
       "id": 1679497934958
@@ -111,42 +137,6 @@
       "isUrgent": true,
       "categoryId": 1679342250722,
       "id": 1679497944117
-    },
-    {
-      "title": "Task 4",
-      "date": "2023-03-24T00:00:00.000Z",
-      "time": "15:13",
-      "isDone": false,
-      "isUrgent": true,
-      "categoryId": 1,
-      "id": 1679497961036
-    },
-    {
-      "title": "Task 5",
-      "date": "2023-03-24T00:00:00.000Z",
-      "time": "15:13",
-      "isDone": false,
-      "isUrgent": false,
-      "categoryId": 1,
-      "id": 1679497969513
-    },
-    {
-      "title": "Task 7",
-      "date": "2023-03-25T00:00:00.000Z",
-      "time": "14:26",
-      "isDone": false,
-      "isUrgent": true,
-      "categoryId": 1,
-      "id": 1679667848481
-    },
-    {
-      "title": "Task 1",
-      "date": "2023-03-26T00:00:00.000Z",
-      "time": "16:18",
-      "isDone": false,
-      "isUrgent": true,
-      "categoryId": 1,
-      "id": 1679836737791
     },
     {
       "title": "Task 2",
@@ -174,12 +164,102 @@
       "isUrgent": false,
       "categoryId": 2,
       "id": 1679842495818
+    },
+    {
+      "title": "Task ",
+      "date": "2023-03-29T00:00:00.000Z",
+      "time": "11:54",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 1,
+      "id": 1680090720919
+    },
+    {
+      "title": "hrqre",
+      "date": "2023-03-30T00:00:00.000Z",
+      "time": "16:21",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 1,
+      "id": 1680193092310
+    },
+    {
+      "title": "fghjk",
+      "date": "2023-03-30T00:00:00.000Z",
+      "time": "18:37",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 1,
+      "id": 1680194266060
+    },
+    {
+      "title": "tyuiom",
+      "date": "2023-03-17T00:00:00.000Z",
+      "time": "18:39",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 1679342250722,
+      "id": 1680194381989
+    },
+    {
+      "title": "hbn,;:!",
+      "date": "2023-03-31T00:00:00.000Z",
+      "time": "21:15",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 2,
+      "id": 1680200145950
+    },
+    {
+      "title": "bhjn,;:",
+      "date": "2023-03-31T00:00:00.000Z",
+      "time": "18:19",
+      "isDone": false,
+      "isUrgent": false,
+      "categoryId": 1679342250722,
+      "id": 1680200208184
+    },
+    {
+      "title": "vgbhjnk",
+      "date": "2023-04-01T00:00:00.000Z",
+      "time": "18:20",
+      "isDone": false,
+      "isUrgent": true,
+      "categoryId": 1679342250722,
+      "id": 1680200246715
+    },
+    {
+      "title": "vgbhjnk",
+      "date": "2023-04-01T00:00:00.000Z",
+      "time": "18:20",
+      "isDone": false,
+      "isUrgent": false,
+      "categoryId": 1679342250722,
+      "id": 1680200248696
+    },
+    {
+      "title": "bn,",
+      "date": "2023-04-01T00:00:00.000Z",
+      "time": "18:20",
+      "isDone": false,
+      "isUrgent": false,
+      "categoryId": 1679342250722,
+      "id": 1680200272421
+    },
+    {
+      "title": "bn,",
+      "date": "2023-04-01T00:00:00.000Z",
+      "time": "18:20",
+      "isDone": false,
+      "isUrgent": false,
+      "categoryId": 1679342250722,
+      "id": 1680200294519
     }
   ],
   "colors": [
     {
       "id": 0,
-      "color": "gray.50.800"
+      "color": "#F9F9F9"
     },
     {
       "id": 1,

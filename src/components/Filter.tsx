@@ -14,12 +14,14 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { getCategories } from "../api/categories";
 import { useQuery } from "@tanstack/react-query";
 import { Category } from "../interfaces";
 import { useFilterStore } from "../store";
 import { BiFilterAlt } from "react-icons/Bi";
+import { useLocation } from "react-router-dom";
 import React from "react";
 
 const Filter = () => {
@@ -43,9 +45,17 @@ const Filter = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+
+  const bgGray = useColorModeValue("bgGrayLight", "bgGrayDark");
+  const text = useColorModeValue("textLight", "textDark");
+
+  let location = useLocation().pathname;
+
+  const today = new Date().toISOString().split("T")[0];
+
   return (
     <>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+      <Button ref={btnRef} colorScheme="gray" onClick={onOpen}>
         <BiFilterAlt />
       </Button>
       <Drawer
@@ -55,9 +65,9 @@ const Filter = () => {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg={bgGray} color={text}>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Filter</DrawerHeader>
 
           <DrawerBody>
             <FormControl w={"max-content"}>
@@ -124,13 +134,20 @@ const Filter = () => {
                 </option>
               </Select>
             </FormControl>
-            <FormControl w={"max-content"}>
+            <FormControl
+              w={"max-content"}
+              display={
+                location != "/" && location != "/upcoming" ? "block" : "none"
+              }
+            >
               <FormLabel>
                 <Text as="b">Date</Text>
               </FormLabel>
               <Input
                 type="date"
-                value={date ? new Date(date).toISOString().substr(0, 10) : ""}
+                max={location == "/notDone" ? today : ""}
+                min={location != "/notDone" ? today : ""}
+                value={date ? new Date(date).toISOString() : ""}
                 onChange={(e) =>
                   changeDate(
                     e.target.value == ""
@@ -146,7 +163,7 @@ const Filter = () => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onclick={reset}>
+            <Button colorScheme="blue" onClick={reset}>
               Reset
             </Button>
           </DrawerFooter>

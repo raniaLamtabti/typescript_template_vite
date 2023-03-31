@@ -3,6 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   '@chakra-ui/icons': ^2.0.17
   '@chakra-ui/react': ^2.5.1
+  '@emoji-mart/data': ^1.1.2
+  '@emoji-mart/react': ^1.1.1
   '@emotion/react': ^11.10.6
   '@emotion/styled': ^11.10.6
   '@tanstack/react-query': ^4.26.1
@@ -15,6 +17,8 @@ specifiers:
   '@vitejs/plugin-react-swc': ^3.0.0
   axios: ^1.3.4
   axios-react: ^2.0.8
+  emoji-mart: ^5.5.2
+  emoji-picker-react: ^4.4.8
   eslint: ^8.35.0
   eslint-config-prettier: ^8.6.0
   framer-motion: ^10.1.0
@@ -30,6 +34,8 @@ specifiers:
 dependencies:
   '@chakra-ui/icons': 2.0.17_react@18.2.0
   '@chakra-ui/react': 2.5.1_unfdn3pm3nyctbo53z4nc2aeky
+  '@emoji-mart/data': 1.1.2
+  '@emoji-mart/react': 1.1.1_kyrnz3vmphzqyjjk2ivrm6bcsu
   '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
   '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
   '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
@@ -37,6 +43,8 @@ dependencies:
   '@types/axios': 0.14.0
   axios: 1.3.4
   axios-react: 2.0.8_sl7qy3szkbhf4y2ig6adrjxz7a
+  emoji-mart: 5.5.2
+  emoji-picker-react: 4.4.8_react@18.2.0
   framer-motion: 10.1.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1188,6 +1196,20 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@emoji-mart/data/1.1.2:
+    resolution: {integrity: sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==}
+    dev: false
+
+  /@emoji-mart/react/1.1.1_kyrnz3vmphzqyjjk2ivrm6bcsu:
+    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      emoji-mart: 5.5.2
+      react: 18.2.0
+    dev: false
+
   /@emotion/babel-plugin/11.10.6:
     resolution: {integrity: sha512-p2dAqtVrkhSa7xz1u/m9eHYdLi+en8NowrmXeF/dKtJpU8lCWli8RUAati7NcSl0afsBott48pdnANuD0wh9QQ==}
     dependencies:
@@ -1714,6 +1736,7 @@ packages:
     resolution: {integrity: sha512-2AMpRiA6QivHOUiBpQAVxjiHAA68Ei23ZUMNaRJrN6omWiSFLoYrxGcT6BXtuzp0Jw4h6HZCmGGIM/gbwebO2A==}
     engines: {node: '>=12'}
     dependencies:
+      remove-accents: 0.4.2
       remove-pink.400s: 0.4.2
     dev: false
 
@@ -2153,6 +2176,11 @@ packages:
       mimic-response: 1.0.1
     dev: false
 
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
+
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -2305,6 +2333,20 @@ packages:
 
   /duplexer3/0.1.5:
     resolution: {integrity: sha512-1A8za6ws41LQgv9HrE/66jyC5yuSjQ3L/KOpFtoBilsAK2iA2wuS5rTt1OCzIvtS2V7nVmedsUU+DGRcjBmOYA==}
+    dev: false
+
+  /emoji-mart/5.5.2:
+    resolution: {integrity: sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==}
+    dev: false
+
+  /emoji-picker-react/4.4.8_react@18.2.0:
+    resolution: {integrity: sha512-5bbj0PCvpjB64PZj31wZ35EoebF2mKoHqEEx9u2ZLghx7sGoD1MgyDhse851rqROypjhmK9IUY15QBa7mCLP0g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      clsx: 1.2.1
+      react: 18.2.0
     dev: false
 
   /end-of-stream/1.4.4:
@@ -3305,6 +3347,10 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
     dev: true
+
+  /remove-accents/0.4.2:
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
 
   /remove-pink.400s/0.4.2:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}

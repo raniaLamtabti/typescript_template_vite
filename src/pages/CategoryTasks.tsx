@@ -1,17 +1,8 @@
-import {
-  Stack,
-  Box,
-  Text,
-  Heading,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from "@chakra-ui/react";
+import { Stack, Box, Text, Heading, useColorModeValue } from "@chakra-ui/react";
 import Task from "../components/Task";
 import { useQuery } from "@tanstack/react-query";
 import { getTasks } from "../api/tasks";
+import { getCategory } from "../api/categories";
 import { useFilterStore } from "../store";
 import { useParams } from "react-router-dom";
 import { Filter, Task as TaskInterface } from "../interfaces";
@@ -35,16 +26,28 @@ const Dashboard = () => {
     queryFn: () => getTasks(filter),
   });
 
+  const categoryQuery = useQuery({
+    queryKey: ["category"],
+    queryFn: () => getCategory(parseInt(params.catId)),
+  });
+
+  console.log(categoryQuery);
+
   if (tasksQuery.status === "loading") return <h1>Loading...</h1>;
   if (tasksQuery.status === "error") {
     return <h1>{JSON.stringify(tasksQuery.error)}</h1>;
   }
 
+  const text = useColorModeValue("textLight", "textDark");
+
   return (
     //By Category
-    <Stack spacing={"50px"} h="-webkit-fit-content" overflowY={"scroll"}>
-      <Heading color={"blue"}>{catName}</Heading>
-      <Stack spacing={"20px"} h="-webkit-fit-content" overflowY={"scroll"}>
+    <Stack spacing={"50px"} h="-webkit-fit-content">
+      <Stack spacing={"20px"}>
+        <Heading as="h1">{categoryQuery.data.emoji}</Heading>
+        <Heading color={text}>{catName}</Heading>
+      </Stack>
+      <Stack spacing={"20px"} h="-webkit-fit-content">
         {tasksQuery.data.map((task: TaskInterface) => (
           <Task
             key={task.id}

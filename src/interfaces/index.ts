@@ -15,6 +15,7 @@ export interface Task {
 }
 
 export interface Category {
+  emoji: string;
   id: number;
   name: string;
   color: string;
