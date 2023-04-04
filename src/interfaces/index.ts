@@ -20,8 +20,3 @@ export interface Category {
   name: string;
   color: string;
 }
-
-export interface Color {
-  id: number;
-  color: string;
-}

@@ -8,6 +8,7 @@ interface FilterState {
   changeCategory: (categoryId?: number) => void;
   changeUrgent: (isUrgent?: boolean) => void;
   changeDate: (date?: string) => void;
+  reset: () => void;
 }
 
 export const useFilterStore = create<FilterState>(
@@ -27,6 +28,12 @@ export const useFilterStore = create<FilterState>(
         set({ isUrgent: isUrgentNew });
       },
       changeDate: (newDate) => set({ date: newDate }),
+      reset: () =>
+        set({
+          categoryId: undefined,
+          isUrgent: undefined,
+          date: undefined,
+        }),
     }),
     {
       name: "filter-state",

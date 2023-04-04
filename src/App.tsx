@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Upcoming from "./pages/Upcoming";
 import NotDone from "./pages/NotDone";
 import CategoryTasks from "./pages/CategoryTasks";
-import SideBar from "./components/SideBar";
+import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import { useTheme } from "@chakra-ui/react";
 import "./App.css";
@@ -12,15 +12,21 @@ import "./App.css";
 const Template = () => {
   const bg = useColorModeValue("bgLight", "bgDark");
   return (
-    <Flex bgColor={bg} minH="100vh" minW={"100vw"}>
-      <SideBar />
-      <Box py={"5px"} w={"-webkit-fill-available"}>
-        <TopBar />
-        <Box p={"8%"}>
+    <Box bgColor={bg} minH="100vh" minW={"100vw"}>
+      <TopBar />
+      <Flex minW={"100vw"}>
+        <Sidebar />
+        <Box
+          pr={"8%"}
+          pl={{ base: "0%", md: "8%" }}
+          py={"50px"}
+          w={"-webkit-fit-content"}
+          flex="1"
+        >
           <Outlet />
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </Box>
   );
 };
 

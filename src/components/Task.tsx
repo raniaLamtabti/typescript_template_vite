@@ -2,7 +2,6 @@ import {
   Flex,
   Box,
   Text,
-  Stack,
   Checkbox,
   Divider,
   Center,
@@ -15,10 +14,10 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { deleteTask, finishTask } from "../api/tasks";
 import {} from "../api/tasks";
 import { queryClient } from "../queryClient";
+import TimeAgo from "react-timeago";
 
 const Task = (props: any) => {
-  const currentDate = new Date();
-  const today = currentDate.setHours(0, 0, 0, 0);
+  const today = new Date().toISOString().split("T")[0];
 
   const deleteTaskMutation = async () => {
     await deleteTask(props.idTask);
@@ -34,27 +33,14 @@ const Task = (props: any) => {
   const bg = useColorModeValue("bgLight", "bgDark");
   const bgTaskDone = useColorModeValue("bgTaskDoneLight", "bgTaskDoneDark");
 
-  const date = new Date(props.date);
+  const date = new Date(props.date).toISOString().split("T")[0];
 
-  console.log(date, ",", currentDate);
-  if (date === currentDate) {
-    console.log("yes");
-  }
-
-  const formattedDate = date
-    .toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    })
-    .replace(/\s/g, ".");
   return (
     <Flex
       p="20px"
       borderRadius={"md"}
       bg={props.done == true ? bgTaskDone : bg}
-      w="100%"
-      color={text}
+      color={props.done != true ? text : "textGrayDark"}
       justifyContent={"space-between"}
       alignItems="center"
       h="50px"
@@ -78,7 +64,13 @@ const Task = (props: any) => {
         </Text>
       </Flex>
       <Flex gap={"20px"} alignItems="center">
-        <Badge colorScheme="red">{formattedDate}</Badge>
+        <Badge
+          colorScheme={
+            date === today ? "green" : date <= today ? "red" : "gray"
+          }
+        >
+          <TimeAgo date={date} />
+        </Badge>
         <Center height="40px">
           <Divider orientation="vertical" borderColor={"#F9F9F9"} />
         </Center>

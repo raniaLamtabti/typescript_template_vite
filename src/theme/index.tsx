@@ -18,7 +18,7 @@ export default extendTheme({
     bgLight: "#FFFFFF",
     bgGrayLight: "#F9F9F9",
     textDark: "#FDFDFD",
-    textGrayDark: "#464648",
+    textGrayDark: "#7c7c80",
     bgTaskDoneDark: "#27292B",
     bgDark: "#1F2123",
     bgGrayDark: "#252728",

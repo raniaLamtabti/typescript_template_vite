@@ -72,6 +72,7 @@ const CreateTask = () => {
 
   const bgGray = useColorModeValue("bgGrayLight", "bgGrayDark");
   const text = useColorModeValue("textLight", "textDark");
+  const bg = useColorModeValue("gray.100", "bgDark");
 
   return (
     <Box>
@@ -97,62 +98,64 @@ const CreateTask = () => {
             <ModalHeader>Add Task</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <FormControl>
-                <FormLabel>
-                  <Text as="b">Name of the task</Text>
-                </FormLabel>
-                <Input
-                  type="text"
-                  id="title"
-                  ref={titleRef as React.RefObject<HTMLInputElement>}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>
-                  <Text as="b">Category</Text>
-                </FormLabel>
-                <Select
-                  placeholder="Select option"
-                  id="category"
-                  ref={cateRef as React.RefObject<HTMLSelectElement>}
-                >
-                  {categoriesQuery.data?.map((cat: Category) => (
-                    <option value={cat.id} key={cat.id}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl>
-                <FormLabel>
-                  <Text as="b">Date</Text>
-                </FormLabel>
-                <Input
-                  type="date"
-                  id="date"
-                  ref={dateRef as React.RefObject<HTMLInputElement>}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>
-                  <Text as="b">Time</Text>
-                </FormLabel>
-                <Input
-                  type="time"
-                  id="time"
-                  ref={timeRef as React.RefObject<HTMLInputElement>}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="isChecked">
-                  <Text as="b">Urgent</Text>
-                </FormLabel>
-                <Switch
-                  id="isChecked"
-                  isChecked={urgentVal}
-                  onChange={handleInputChange}
-                />
-              </FormControl>
+              <Stack spacing={"20px"}>
+                <FormControl>
+                  <FormLabel>
+                    <Text as="b">Name</Text>
+                  </FormLabel>
+                  <Input
+                    type="text"
+                    id="title"
+                    ref={titleRef as React.RefObject<HTMLInputElement>}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>
+                    <Text as="b">Category</Text>
+                  </FormLabel>
+                  <Select
+                    placeholder="Select option"
+                    id="category"
+                    ref={cateRef as React.RefObject<HTMLSelectElement>}
+                  >
+                    {categoriesQuery.data?.map((cat: Category) => (
+                      <option value={cat.id} key={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <FormLabel>
+                    <Text as="b">Date</Text>
+                  </FormLabel>
+                  <Input
+                    type="date"
+                    id="date"
+                    ref={dateRef as React.RefObject<HTMLInputElement>}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>
+                    <Text as="b">Time</Text>
+                  </FormLabel>
+                  <Input
+                    type="time"
+                    id="time"
+                    ref={timeRef as React.RefObject<HTMLInputElement>}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor="isChecked">
+                    <Text as="b">Urgent</Text>
+                  </FormLabel>
+                  <Switch
+                    id="isChecked"
+                    isChecked={urgentVal}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </Stack>
             </ModalBody>
 
             <ModalFooter>
@@ -169,7 +172,7 @@ const CreateTask = () => {
                 {createTaskMutation.isLoading ? "Loading..." : "Add"}
               </Button>
               <Button
-                bgColor={"purpleBrand"}
+                bgColor={bg}
                 color={text}
                 onClick={onClose}
                 disabled={createTaskMutation.isLoading}

@@ -10,7 +10,7 @@ import { Filter, Task as TaskInterface } from "../interfaces";
 const Dashboard = () => {
   const params = useParams();
   const catName =
-    params.catName.charAt(0).toUpperCase() + params.catName.slice(1);
+    params.catName.charAt(0).toUpperCase() + params.catName?.slice(1);
 
   const filter = useFilterStore((state) => {
     const filterObj = {
@@ -31,8 +31,6 @@ const Dashboard = () => {
     queryFn: () => getCategory(parseInt(params.catId)),
   });
 
-  console.log(categoryQuery);
-
   if (tasksQuery.status === "loading") return <h1>Loading...</h1>;
   if (tasksQuery.status === "error") {
     return <h1>{JSON.stringify(tasksQuery.error)}</h1>;
@@ -44,7 +42,7 @@ const Dashboard = () => {
     //By Category
     <Stack spacing={"50px"} h="-webkit-fit-content">
       <Stack spacing={"20px"}>
-        <Heading as="h1">{categoryQuery.data.emoji}</Heading>
+        <Heading as="h1">{categoryQuery.data?.emoji}</Heading>
         <Heading color={text}>{catName}</Heading>
       </Stack>
       <Stack spacing={"20px"} h="-webkit-fit-content">

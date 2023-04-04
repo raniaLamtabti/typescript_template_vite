@@ -22,8 +22,6 @@ import {
 import React, { useRef, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { createCategory } from "../api/categories";
-import { getColors } from "../api/colors";
-import { Color } from "../interfaces";
 import { AiOutlinePlus } from "react-icons/Ai";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -33,11 +31,6 @@ const CreateCategory = () => {
   const colorRef = React.useRef() as React.MutableRefObject<HTMLSelectElement>;
 
   const queryClient = useQueryClient();
-
-  const colorsQuery = useQuery({
-    queryKey: ["colors"],
-    queryFn: getColors,
-  });
 
   const createCategoryMutation = useMutation({
     mutationFn: createCategory,
@@ -51,7 +44,6 @@ const CreateCategory = () => {
     e.preventDefault();
     createCategoryMutation.mutate({
       name: nameRef.current.value,
-      color: colorRef.current.value,
       emoji: currentEmoji,
       id: Date.now(),
     });
@@ -59,6 +51,7 @@ const CreateCategory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const bgGray = useColorModeValue("bgGrayLight", "bgGrayDark");
+  const bg = useColorModeValue("gray.100", "bgDark");
   const text = useColorModeValue("textLight", "textDark");
 
   const [isPickerVisible, setPickerVisible] = useState(false);
@@ -70,11 +63,12 @@ const CreateCategory = () => {
         <Button
           onClick={onOpen}
           bgColor={"transparent"}
-          color={text}
           border="none"
           display="flex"
           gap="10px"
           p="0px"
+          fontWeight={"normal"}
+          fontSize={"18px"}
           _hover={{
             background: "transparent",
             color: text,
@@ -95,48 +89,33 @@ const CreateCategory = () => {
             <ModalHeader>Add Category</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <FormControl>
-                <FormLabel>
-                  <Text as="b">Name of the cat</Text>
-                </FormLabel>
-                <Input
-                  type="text"
-                  id="name"
-                  ref={nameRef as React.RefObject<HTMLInputElement>}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>
-                  <Text as="b">Color</Text>
-                </FormLabel>
-                <Select
-                  placeholder="Select option"
-                  id="color"
-                  ref={colorRef as React.RefObject<HTMLSelectElement>}
-                >
-                  {colorsQuery.data?.map((color: Color) => (
-                    <option value={color.color} key={color.id}>
-                      {color.color}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl>
-                <Button onClick={() => setPickerVisible(!isPickerVisible)}>
-                  Open Picker {currentEmoji || ""}
-                </Button>
-                <Box display={isPickerVisible ? "block" : "none"}>
-                  <Picker
-                    data={data}
-                    previewPosition="none"
-                    onEmojiSelect={(e) => {
-                      setCurrentEmoji(e.native);
-                      console.log(e.native);
-                      setPickerVisible(isPickerVisible);
-                    }}
+              <Stack spacing={"20px"}>
+                <FormControl>
+                  <FormLabel>
+                    <Text as="b">Name of the cat</Text>
+                  </FormLabel>
+                  <Input
+                    type="text"
+                    id="name"
+                    ref={nameRef as React.RefObject<HTMLInputElement>}
                   />
-                </Box>
-              </FormControl>
+                </FormControl>
+                <FormControl>
+                  <Button onClick={() => setPickerVisible(!isPickerVisible)}>
+                    Open Picker {currentEmoji || ""}
+                  </Button>
+                  <Box display={isPickerVisible ? "block" : "none"}>
+                    <Picker
+                      data={data}
+                      previewPosition="none"
+                      onEmojiSelect={(e) => {
+                        setCurrentEmoji(e.native);
+                        setPickerVisible(isPickerVisible);
+                      }}
+                    />
+                  </Box>
+                </FormControl>
+              </Stack>
             </ModalBody>
 
             <ModalFooter>
@@ -153,8 +132,8 @@ const CreateCategory = () => {
                 {createCategoryMutation.isLoading ? "Loading..." : "Add"}
               </Button>
               <Button
-                bgColor={"purpleBrand"}
-                color={"text"}
+                bgColor={bg}
+                color={text}
                 onClick={onClose}
                 disabled={createCategoryMutation.isLoading}
               >

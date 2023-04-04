@@ -6,7 +6,7 @@ import ToggleColorMode from "./ToggleColorMode";
 
 const SideBar = () => {
   return (
-    <Flex w="100%" py="10px" px="20px" justifyContent={"flex-end"} gap="10px">
+    <Flex w="100vw" py="10px" px="20px" justifyContent={"flex-end"} gap="10px">
       <CreateTask />
       <Filter />
       <ToggleColorMode />
