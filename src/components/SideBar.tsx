@@ -59,16 +59,16 @@ const SidebarContent = () => {
     (task: TaskInterface) => task.categoryId
   );
 
-  const counts = tasksCategories.reduce(
-    (counts: { [key: number]: number }, curr: number) => {
-      if (!(curr in counts)) {
-        counts[curr] = 0;
-      }
-      counts[curr]++;
-      return counts;
-    },
-    {}
-  );
+  // const counts = tasksCategories.reduce(
+  //   (counts: { [key: number]: number }, curr: number) => {
+  //     if (!(curr in counts)) {
+  //       counts[curr] = 0;
+  //     }
+  //     counts[curr]++;
+  //     return counts;
+  //   },
+  //   {}
+  // );
 
   const text = useColorModeValue("textLight", "textDark");
   const textGray = useColorModeValue("textGrayLight", "textGrayDark");
@@ -149,9 +149,9 @@ const SidebarContent = () => {
                     <Box>{cat.emoji}</Box>
                     {cat.name}
                   </Flex>
-                  <Text color={textGray} fontSize={"16px"}>
+                  {/* <Text color={textGray} fontSize={"16px"}>
                     {counts[cat.id] === undefined ? "0" : counts[cat.id]}
-                  </Text>
+                  </Text> */}
                 </Link>
               ))}
               <CreateCategory />
